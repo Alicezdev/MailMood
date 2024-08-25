@@ -1,0 +1,10 @@
+# Ignore environment variables
+.env
+
+# Ignore logs
+*.log
+
+# Ignore all files in the build directory
+venv/
+#Desktop Services Store, is an invisible file created by the macOS operating system in each directory.
+.DS_Store 
