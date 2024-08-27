@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knowledge Base</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 </head>
 
 <body>
@@ -16,17 +24,21 @@
         <input type="text" id="target_email" placeholder="Pick an Inbox to Uncover Its Mood!" required>
         <button id="analyze-emails">Tap Into the Emotion!</button>
     </form>
-    <div id="mycanvas">
-        <canvas id="emotionPieChart" width="600" height="600"></canvas>
-    </div>
-    <div class="custom-font">
-        <div id="response" class="mail-box-background"></div>
-        <div id="responseSubject" class="mail-box-background"></div>
-        <div id="responseBody" class="mail-box-background"></div>
-    </div>
 
+    <!-- Slider Section -->
+    <div class="one-time">
+        <div class="custom-font">
+            <div id="emailResponseSlider" class="mail-box-background"></div>
+           
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+
+
 </body>
 
 </html>
+
+
+

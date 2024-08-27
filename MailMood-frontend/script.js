@@ -5,49 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const parseEmailsButton = document.getElementById('parse-emails');
     const analyzeEmailsButton = document.getElementById('analyze-emails');
 
-
-    // analyzeEmailsButton.addEventListener('click', async (e) => {
-    //     e.preventDefault();
-    //     const target_email = document.getElementById('target_email').value;
-    //     /* const response =  */await fetch('http://127.0.0.1:3000/analyze-email', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({target_email})
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data); 
-    //         const tone = data.tone;
-    //         const mood_percentages = data.mood_percentages;
-    //         const emoji = data.emoji;
-    
-      
-    //         // You can now use these values in your frontend
-    //         console.log(tone); 
-    //         console.log(mood_percentages); 
-    //         console.log(emoji); 
-    //         let mood_percentages_list = [mood_percentages.neg, mood_percentages.neu, mood_percentages.pos];
-
-  
-      
-    //         // Example: Using the data to draw a pie chart
-    //         drawPieChart(mood_percentages_list);
-    //     });
-
-    //     const email = await response.json();
-    //     console.log(email)
-    //     const subjectResponse = document.getElementById('responseSubject');
-    //     const bodyResponse = document.getElementById('responseBody');
-    //     const analyzeResponse = document.getElementById('response');
-        
-    //     console.log(analyzeResponse)
-    //     analyzeResponse.innerHTML = `Tone: ${email.tone}`;
-    //     subjectResponse.innerHTML = `Subject: ${email.subject}`;
-    //     bodyResponse.innerHTML = `Body: ${email.body}`;
-    // });
-
     analyzeEmailsButton.addEventListener('click', async (e) => {
         e.preventDefault();
         
@@ -68,43 +25,77 @@ document.addEventListener('DOMContentLoaded', () => {
     
             const data = await response.json();
             
-            console.log(data);
-            
-            const { tone, mood_percentages, emoji } = data;
-            
-            console.log(tone);
-            console.log(mood_percentages);
-            console.log(emoji);
-            
-            let mood_percentages_list = [mood_percentages.neg, mood_percentages.neu, mood_percentages.pos];
-            
-            // Example: Using the data to draw a pie chart
-            drawPieChart(mood_percentages_list);
-    
-            const subjectResponse = document.getElementById('responseSubject');
-            const bodyResponse = document.getElementById('responseBody');
-            const analyzeResponse = document.getElementById('response');
+            console.log(data); // This will log the array of analyzed emails 
 
-            analyzeResponse.innerHTML = `Tone: ${tone}${emoji}`;
-            subjectResponse.innerHTML = `Subject: ${data.subject}`;
-            bodyResponse.innerHTML = `Body: ${data.body}`;
+            const sliderContainer = $('#emailResponseSlider');
+
+            console.log(sliderContainer); // Check if this is null
+            // Clear previous slider content
+            sliderContainer.html('');
+    
+            // Iterate through each analyzed email
+            data.forEach((email, index) => {
+                const { subject, body, tone, mood_percentages, emoji } = email;
+                
+                console.log(`Email ${index + 1}:`);
+                console.log(tone);
+                console.log(mood_percentages);
+                console.log(emoji);
+                
+                let mood_percentages_list = [mood_percentages.neg, mood_percentages.neu, mood_percentages.pos];
+
+                // Create a new slide item
+                const slideItem = $(`
+                <div class="slide-item">
+                    <div><strong>Mood:</strong> ${tone} ${emoji}</div>
+                    <div id="chartContainer${index + 1}" class="chart-container"></div>
+                    <div><strong>Subject:</strong> ${subject}</div>
+                    <div><strong>Body:</strong> ${body}</div>                                    
+                </div>
+                `);
+                console.log(`slideItem: ${slideItem}`);
+                sliderContainer.append(slideItem);
+                // Example: Using the data to draw a pie chart for each email
+                drawPieChart(mood_percentages_list, `chartContainer${index + 1}`);
+            });
+            // Initialize the Slick slider after appending the slides
+            if (sliderContainer.length > 0) {
+                sliderContainer.slick({
+                    infinite: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    arrows: true,
+                });
+            } else {
+                console.error('Slider container not found');
+            }
         } catch (error) {
             console.error('Error:', error);
         }
     });
     
-
 });
 
-function drawPieChart(percentages) {
-    const emotionPieChart = document.getElementById('emotionPieChart').getContext('2d');
+function drawPieChart(percentages, containerId)  {
+
+    // Create a new canvas element for each chart
+    const container = document.getElementById(containerId);
+    // Clear any existing content in the container
+    container.innerHTML = '';  
+    // Create a new canvas element and append it to the container
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+
+    // Get the context for the newly created canvas
+    const emotionPieChart = canvas.getContext('2d');
     new Chart(emotionPieChart, {
         type: 'pie',
         data: {
             labels: ['Negative', 'Neutral', 'Positive'],  // Adjust labels as needed
             datasets: [{
                 data: percentages,
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']  // Adjust colors as needed
+                backgroundColor: ['#EE7785', '#C89EC4', '#84B1ED']  // Adjust colors as needed
             }]
         },
         options: {
@@ -113,3 +104,29 @@ function drawPieChart(percentages) {
         }
     });
 }
+
+$(document).ready(function(){
+    $('.one-time').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      adaptiveHeight: true
+    });
+  
+    // Optional: Adjust height on resize
+    $(window).resize(function(){
+      adjustSliderHeight();
+    });
+  
+    function adjustSliderHeight() {
+      var $slickTrack = $('.one-time .slick-track');
+      var slideHeight = $slickTrack.find('.slick-slide').outerHeight();
+      $('.one-time').height(slideHeight);
+    }
+  
+    // Adjust height initially
+    adjustSliderHeight();
+  });
+
+

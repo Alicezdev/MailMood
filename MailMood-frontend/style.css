@@ -86,6 +86,27 @@ button:hover {
     border-radius: 5px; /* Rounded corners */
 }
 
+.chart-container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    margin: 10px 0; /* Add some margin for spacing */
+    width: 100%; /* Make sure it takes up the full width */
+}
+
+.slide-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centers text and child elements */
+    padding: 20px; /* Add some padding */
+    width: 100%;
+}
+
+
+
+
 
 
 
