@@ -78,19 +78,19 @@ def analyze_email_tone(text):
 
         if sentiment_dict['compound'] > 0.6 :
             tone = "Very Positive"   
-            emoji = "U+1F601"
+            emoji = "😁"
         elif sentiment_dict['compound'] <= 0.6 and  sentiment_dict['compound'] > 0.2:
             tone = "Positive"
-            emoji = "U+1F642"
+            emoji = "🙂"
         elif sentiment_dict['compound'] <= 0.2 and sentiment_dict['compound'] > -0.2 :
             tone = "Neutral"
-            emoji = "U+1F611"
+            emoji = "😑"
         elif sentiment_dict['compound'] <= - 0.2 and sentiment_dict['compound'] > -0.6 :
             tone = "Negative"
-            emoji = "U+1F61E"
+            emoji = "😞"
         elif sentiment_dict['compound'] <= - 0.6:
             tone = "Very Negative"
-            emoji = "U+1F621"
+            emoji = "😡"
 
         logging.debug(f"compound: {sentiment_dict['compound']}")
         logging.debug(f"emotion: {tone}")
@@ -161,21 +161,21 @@ def categorize_email(subject):
         return 'Finance'
     return 'General'
 
-@app.route('/add-email', methods=['POST'])
-def add_email():
-    logging.debug("Received request to add email.")
+# @app.route('/add-email', methods=['POST'])
+# def add_email():
+#     logging.debug("Received request to add email.")
     
-    try:
-        data = request.json
-        logging.debug(f"Data received: {data}")
+#     try:
+#         data = request.json
+#         logging.debug(f"Data received: {data}")
         
-        collection.insert_one(data)
-        logging.info("Email added successfully.")
-        return jsonify({'message': 'Email added successfully'}), 201
+#         collection.insert_one(data)
+#         logging.info("Email added successfully.")
+#         return jsonify({'message': 'Email added successfully'}), 201
 
-    except Exception as e:
-        logging.error(f"Error adding email: {e}")
-        return jsonify({'error': 'Failed to add email'}), 500
+#     except Exception as e:
+#         logging.error(f"Error adding email: {e}")
+#         return jsonify({'error': 'Failed to add email'}), 500
 
 # @app.route('/parse-email', methods=['POST'])
 # def parse_email():

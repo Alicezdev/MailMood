@@ -84,8 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const subjectResponse = document.getElementById('responseSubject');
             const bodyResponse = document.getElementById('responseBody');
             const analyzeResponse = document.getElementById('response');
-            
-            analyzeResponse.innerHTML = `Tone: ${tone}`;
+
+            analyzeResponse.innerHTML = `Tone: ${tone}${emoji}`;
             subjectResponse.innerHTML = `Subject: ${data.subject}`;
             bodyResponse.innerHTML = `Body: ${data.body}`;
         } catch (error) {

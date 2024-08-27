@@ -6,5 +6,9 @@
 
 # Ignore all files in the build directory
 venv/
+
 #Desktop Services Store, is an invisible file created by the macOS operating system in each directory.
 .DS_Store 
+
+# Ignore backup files
+.bak
