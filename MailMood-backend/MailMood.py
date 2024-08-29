@@ -3,11 +3,8 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 import logging
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 from nylas import Client
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from textblob import TextBlob
 
 
 
