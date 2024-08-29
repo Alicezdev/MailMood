@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const emailForm = document.getElementById('email-form');
-    const loadEmailsButton = document.getElementById('load-emails');
-    const emailListDiv = document.getElementById('email-list');
-    const parseEmailsButton = document.getElementById('parse-emails');
+ 
     const analyzeEmailsButton = document.getElementById('analyze-emails');
 
     analyzeEmailsButton.addEventListener('click', async (e) => {
@@ -25,22 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
             const data = await response.json();
             
-            console.log(data); // This will log the array of analyzed emails 
+            console.log(`response json: ${data}`); // This will log the array of analyzed emails 
 
             const sliderContainer = $('#emailResponseSlider');
 
-            console.log(sliderContainer); // Check if this is null
+
             // Clear previous slider content
             sliderContainer.html('');
-    
+            console.log(`sliderContainer is null?: ${sliderContainer.html}`); // Check if this is null
             // Iterate through each analyzed email
             data.forEach((email, index) => {
                 const { subject, body, tone, mood_percentages, emoji } = email;
                 
                 console.log(`Email ${index + 1}:`);
-                console.log(tone);
-                console.log(mood_percentages);
-                console.log(emoji);
+                console.log(`tone: ${tone}`);
+                console.log(`mood_percentages: ${mood_percentages}`);
+                console.log(`emoji: ${emoji}`);
                 
                 let mood_percentages_list = [mood_percentages.neg, mood_percentages.neu, mood_percentages.pos];
 
@@ -54,12 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 `);
                 console.log(`slideItem: ${slideItem}`);
+                console.log('Starting to append slides');
                 sliderContainer.append(slideItem);
+                console.log('Slide appended');
+
                 // Example: Using the data to draw a pie chart for each email
                 drawPieChart(mood_percentages_list, `chartContainer${index + 1}`);
             });
             // Initialize the Slick slider after appending the slides
+            console.log(`sliderContainer.length: ${sliderContainer.length}`);
             if (sliderContainer.length > 0) {
+                console.log('Initializing slider...');
                 sliderContainer.slick({
                     infinite: true,
                     slidesToShow: 1,
@@ -67,9 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     dots: true,
                     arrows: true,
                 });
+                console.log('Slider initialized.');
             } else {
                 console.error('Slider container not found');
             }
+            console.log(`sliderContainer.length after initialize: ${sliderContainer.length}`);
         } catch (error) {
             console.error('Error:', error);
         }
@@ -81,6 +85,7 @@ function drawPieChart(percentages, containerId)  {
 
     // Create a new canvas element for each chart
     const container = document.getElementById(containerId);
+    console.log(`start to draw pie chart for container: ${container}`);
     // Clear any existing content in the container
     container.innerHTML = '';  
     // Create a new canvas element and append it to the container
@@ -111,10 +116,10 @@ $(document).ready(function(){
       infinite: true,
       speed: 300,
       slidesToShow: 1,
-      adaptiveHeight: true
+      adaptiveHeight: false
     });
   
-    // Optional: Adjust height on resize
+    // Adjust height on resize
     $(window).resize(function(){
       adjustSliderHeight();
     });

@@ -72,21 +72,15 @@ def analyze_email_tone(text):
 
         #sentiment_dict= analyze_sentiment(text)
 
-        if sentiment_dict['compound'] > 0.6 :
+        if sentiment_dict['pos']  >= 0.33:
             tone = "Very Positive"   
             emoji = "😁"
-        elif sentiment_dict['compound'] <= 0.6 and  sentiment_dict['compound'] > 0.2:
-            tone = "Positive"
-            emoji = "🙂"
-        elif sentiment_dict['compound'] <= 0.2 and sentiment_dict['compound'] > -0.2 :
+        elif sentiment_dict['neu'] >= 0.33:
             tone = "Neutral"
-            emoji = "😑"
-        elif sentiment_dict['compound'] <= - 0.2 and sentiment_dict['compound'] > -0.6 :
+            emoji = "🙂"
+        elif sentiment_dict['neg'] >= 0.33 :
             tone = "Negative"
             emoji = "😞"
-        elif sentiment_dict['compound'] <= - 0.6:
-            tone = "Very Negative"
-            emoji = "😡"
 
         logging.debug(f"compound: {sentiment_dict['compound']}")
         logging.debug(f"emotion: {tone}")
@@ -100,57 +94,10 @@ def analyze_email_tone(text):
         'emoji': emoji
     }
 
-# @app.route('/analyze-email', methods=['POST'])
-# def analyze_email():
-#     try:
-#         logging.info("Start to get email info..")
-#         target_email = request.json.get('target_email')
-        
-#         grant_id = os.environ.get("NYLAS_GRANT_ID")
-#         # Fetch the email using Nylas API
-
-#         response = nylas.messages.list(
-#         grant_id,
-#         query_params={
-#             "from": target_email,
-#             "limit":5
-#         }
-#         )
-#         logging.debug(f"Response message: {response}")
-#         email = response[0][0]
-
-#         # Accessing various fields in the Message object
-#         grant_id = email.grant_id
-#         from_email = email.from_[0]['email']
-#         subject = email.subject
-#         snippet = email.snippet
-#         body = email.body
-#         thread_id = email.thread_id
-#         to_email = email.to[0]['email']
-#         date = email.date
-
-#         #logging.debug(f"email subject: {email.subject}, email body: {email.body}")
-#     except Exception as e:
-#         logging.error(f"Error analyzing email: {e}")
-#         return jsonify({'error': 'Failed to analyze email'}), 400
-
-
-#     # Analyze the emotional tone
-#     logging.info("Start to analyze enmotion..")
-#     emotion_result = analyze_email_tone(email.body)
-#     logging.debug(f"emotion_result: {emotion_result}")
-
-#     return jsonify({
-#         'subject': subject,
-#         'body': body,
-#         'tone': emotion_result['tone'],
-#         'mood_percentages': emotion_result['mood_percentages'],
-#         'emoji': emotion_result['emoji']
-#     })
-
 
 @app.route('/analyze-email', methods=['POST'])
 def analyze_email():
+    
     try:
         logging.info("Start to get email info..")
         target_email = request.json.get('target_email')
