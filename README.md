@@ -5,7 +5,7 @@
     <h1 align="center">MAILMOOD</h1>
 </p>
 <p align="center">
-    <em><code>► INSERT-TEXT-HERE</code></em>
+    <em>Detect your email mood, powered by <code>Nylas</code> APIs</em>
 </p>
 <p align="center">
 	<img src="https://img.shields.io/github/license/Alicezdev/MailMood?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
@@ -28,23 +28,18 @@
 - [ Getting Started](#-getting-started)
   - [ Installation](#-installation)
   - [ Usage](#-usage)
-  - [ Tests](#-tests)
-- [ Project Roadmap](#-project-roadmap)
-- [ Contributing](#-contributing)
 - [ License](#-license)
-- [ Acknowledgments](#-acknowledgments)
 </details>
 <hr>
 
 ##  Overview
-
-<code>► MailMood is a tool to detect the emotion behind your emails using the rule-based sentiment analysis tool.</code>
+The application fetches and analyzes emails, providing users with insights into the emotional tone of their messages. The goal is to enhance communication by helping users understand the sentiment behind their emails, whether it's positive, neutral, or negative. This tool is particularly useful for those who want to be more mindful of the emotions conveyed in their correspondence.
 
 ---
 
 ##  Features
 
-<code>► Detect Email Emotion with a Simple UI</code>
+Detect Email Emotion with a Simple UI
 
 ---
 
@@ -68,7 +63,7 @@
 
 | File                                                                                          | Summary                         |
 | ---                                                                                           | ---                             |
-| [MailMood.py](https://github.com/Alicezdev/MailMood/blob/master/MailMood-backend/MailMood.py) | <code>► flask flask_cors nylas vaderSentiment</code> |
+| [MailMood.py](https://github.com/Alicezdev/MailMood/blob/master/MailMood-backend/MailMood.py) | <code>flask</code> <code>flask_cors</code> <code>nylas</code> <code>vaderSentiment</code> |
 
 </details>
 
@@ -76,9 +71,9 @@
 
 | File                                                                                         | Summary                         |
 | ---                                                                                          | ---                             |
-| [index.html](https://github.com/Alicezdev/MailMood/blob/master/MailMood-frontend/index.html) | <code>► jQuery, Slick Carousel Chart.js</code> |
-| [script.js](https://github.com/Alicezdev/MailMood/blob/master/MailMood-frontend/script.js)   | <code>► </code> |
-| [style.css](https://github.com/Alicezdev/MailMood/blob/master/MailMood-frontend/style.css)   | <code>► </code> |
+| [index.html](https://github.com/Alicezdev/MailMood/blob/master/MailMood-frontend/index.html) | <code>jQuery</code> <code>Slick</code> <code>Carousel</code> <code>Chart.js</code> |
+| [script.js](https://github.com/Alicezdev/MailMood/blob/master/MailMood-frontend/script.js)   | |
+| [style.css](https://github.com/Alicezdev/MailMood/blob/master/MailMood-frontend/style.css)   | |
 
 </details>
 
@@ -109,7 +104,7 @@
 > NYLAS_ACCESS_TOKEN=<YOR EMAIL ACCESS TOKEN>
 > ```
 
-<h4>Using <code>pip</code></h4>
+<h4>Install package using <code>pip</code></h4>
 
 > ```console
 > $ pip install flask
@@ -119,9 +114,6 @@
 > $ pip install nylas
 > $ pip install vaderSentiment
 > ```
-
-
-
 
 ###  Usage
 
@@ -137,14 +129,6 @@
 
 ##  License
 
-This project is protected under the [MIT-LICENSE](https://opensource.org/license/mit) License. For more details, refer to the [LICENSE](https://github.com/Alicezdev/MailMood/LICENSE/) file.
-
----
-
-##  Acknowledgments
-
-- List any resources, contributors, inspiration, etc. here.
-
-[**Return**](#-overview)
+This project is protected under the [MIT-LICENSE](https://opensource.org/license/mit) License. For more details, refer to the [LICENSE](https://github.com/Alicezdev/MailMood/blob/main/LICENSE) file.
 
 ---
