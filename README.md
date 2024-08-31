@@ -79,8 +79,9 @@ Detect Email Emotion with a Simple UI
 
 ---
 ##  Demo
+
 <video width="320" height="240" controls>
-  <source src="https://github.com/Alicezdev/MailMood/raw/main/MailMood_demo.mp4" type="video/mp4">
+  <source src="https://github.com/user-attachments/assets/7ef0a01e-8ce9-4082-bc0c-66fd73a05cb3" type="video/mp4">
 </video>
 
 ##  Getting Started
